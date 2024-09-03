@@ -18,17 +18,28 @@ public_users.get('/',function (req, res) {
 
 // Get book details based on ISBN
 public_users.get('/isbn/:isbn',function (req, res) {
-    // Retrieve the email parameter from the request URL
+    // Retrieve the isbn parameter from the request URL
     const isbn = req.params.isbn;
 
-    // send the corresponding friend's details
+    // send the corresponding book's details
     res.send(books[isbn]);
  });
   
 // Get book details based on author
 public_users.get('/author/:author',function (req, res) {
-  //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+    // Retrieve the author parameter from the request URL
+    const author = req.params.author;
+    let results = [];
+
+    Object.entries(books).forEach(([key, value]) => {        
+        let bAuthor = value["author"];
+        if (bAuthor.toLowerCase().indexOf(author.toLowerCase()) !== -1) {
+            results.push(value);            
+        }
+    });
+
+    // send the corresponding book's details
+    res.send(results);
 });
 
 // Get all books based on title
