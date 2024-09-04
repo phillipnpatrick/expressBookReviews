@@ -37,7 +37,7 @@ public_users.post("/register", (req,res) => {
             const message = new Object();
             message.message = "User (" + username + ") already exists!";
 
-            return res.status(404).json(JSON.stringify(message));
+            return res.status(404).json(message);
         }
     }
     // Return error if username or password is missing
